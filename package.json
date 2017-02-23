@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Jade/Pug compiler for React",
   "authors": [
-    "Michael Phan-Ba <michael@mikepb.com>"
-    "erikwoo <wu-junhong@qq.com>"
+    "Michael Phan-Ba <michael@mikepb.com>",
+    "erikwoo <wu-junhong@qq.com>",
+    "Ienze <d.gmiterko@gmai.com>"
   ],
   "repository": {
     "type": "git",
