@@ -1,5 +1,33 @@
 # pug React Compiler
 
+Inteded to be used as part of a compilation toolchain and not
+optimized for production use. Compile the files to JavaScript first,
+then `require()` them as usual.
+
+## Compile with gulp
+
+This is example copied from my project where I used this setup.
+
+```js
+gulp.task('compile-pug-react', function() {
+  return gulp.src('src/**/*.pug').pipe(modify({
+    fileModifier: function(file, contents) {
+      reutrn pact.compileClient(contents, {
+        helpers: [
+        '/*eslint-disable no-unused-vars, no-useless-concat, no-useless-escape, no-sequences */',
+        'import React from \'react\';'
+        ],
+        outputType: 'component'
+      });
+    }
+  }))
+  .pipe(rename(function (path) {
+    path.extname = ".pug.js"
+  })).pipe(gulp.dest('src/components'));
+});
+```
+
+## Directu usage with React
 Use it in your favourite packaging tool.
 
 ```js
@@ -27,7 +55,6 @@ var markup = React.renderComponentToStaticMarkup(new Component());
 */
 ```
 
-
 ## Usage notes
 
 If there are more than one root nodes, only the last statement is
@@ -37,11 +64,6 @@ Using `forEach` in code instead of the `each` block will output
 nothing (`forEach` returns nothing).
 
 Filters, mixins, cases and other things not yet implemented.
-
-Inteded to be used as part of a compilation toolchain and not
-optimized for production use. Compile the files to JavaScript first,
-then `require()` them as usual.
-
 
 ### Special case for using `require`
 
